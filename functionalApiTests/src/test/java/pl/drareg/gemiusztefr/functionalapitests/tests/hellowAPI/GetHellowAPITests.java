@@ -22,7 +22,7 @@ public class GetHellowAPITests extends GlobalConfig {
                 .get("/get")
         .then()
                 .assertThat()
-                  .statusCode(200);
+                    .statusCode(200);
         // @formatter:on
     }
 
