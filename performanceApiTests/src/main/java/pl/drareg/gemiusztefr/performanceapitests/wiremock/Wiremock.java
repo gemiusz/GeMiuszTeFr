@@ -1,4 +1,4 @@
-package pl.drareg.gemiusztefr.functionalapitests.wiremock;
+package pl.drareg.gemiusztefr.performanceapitests.wiremock;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.opentable.extension.BodyTransformer;

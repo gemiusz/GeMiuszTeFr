@@ -5,6 +5,7 @@ import pl.drareg.gemiusztefr.functionalapitests.config.GlobalConfig;
 import pl.drareg.gemiusztefr.functionalapitests.objects.hellowAPI.HellowAPIRequest;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PostHellowAPITests extends GlobalConfig {
@@ -16,13 +17,14 @@ public class PostHellowAPITests extends GlobalConfig {
         // @formatter:off
         given()
                 .spec(specShowFullReqRes)
-                .when()
+        .when()
                 .contentType("application/json")
                 .accept("application/json")
                 .body(hellowAPIRequestObj)
                 .post("/post")
-                .then()
-                .assertThat().statusCode(200);
+        .then()
+                .assertThat()
+                    .statusCode(200);
         // @formatter:on
     }
 
@@ -33,17 +35,63 @@ public class PostHellowAPITests extends GlobalConfig {
         // @formatter:off
         given()
                 .spec(specShowFullReqRes)
-                .when()
+        .when()
                 .contentType("application/json")
                 .accept("application/json")
                 .body(hellowAPIRequestObj)
                 .post("/post")
-                .then()
+        .then()
                 .assertThat()
-                .statusCode(200)
+                    .statusCode(200)
                 .and()
-                .body("Message", equalTo("Hellow API " + hellowAPIRequestObj.getStringToAdd()));
+                    .body("Message", equalTo("Hellow API " + hellowAPIRequestObj.getStringToAdd()));
         // @formatter:on
     }
+
+    @Test
+    public void postHellowAPI_checkStatus200andResponseMessageAndSchema() {
+        HellowAPIRequest hellowAPIRequestObj = new HellowAPIRequest();
+        hellowAPIRequestObj.setStringToAdd("World!");
+        // @formatter:off
+        given()
+                .spec(specShowFullReqRes)
+        .when()
+                .contentType("application/json")
+                .accept("application/json")
+                .body(hellowAPIRequestObj)
+                .post("/post")
+        .then()
+                .assertThat()
+                    .statusCode(200)
+                .and()
+                    .body("Message", equalTo("Hellow API " + hellowAPIRequestObj.getStringToAdd()))
+                .and()
+                    .body(matchesJsonSchemaInClasspath("HellowAPI-ResponseSchema.json"));
+        // @formatter:on
+    }
+
+    @Test
+    public void postHellowAPI_checkStatus200andResponseMessageAndSchemaAndByWireMock() {
+        HellowAPIRequest hellowAPIRequestObj = new HellowAPIRequest();
+        hellowAPIRequestObj.setStringToAdd("World!");
+        // @formatter:off
+        given()
+                .spec(specShowFullReqRes)
+        .when()
+                .contentType("application/json")
+                .accept("application/json")
+                .body(hellowAPIRequestObj)
+                .post("/postAdvanced")
+        .then()
+                .assertThat()
+                    .statusCode(200)
+                .and()
+                    .body("Message", equalTo("Hellow API " + hellowAPIRequestObj.getStringToAdd()))
+                .and()
+                    .body(matchesJsonSchemaInClasspath("HellowAPI-ResponseSchema.json"));
+        // @formatter:on
+    }
+
+
 }
 

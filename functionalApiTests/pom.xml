@@ -26,6 +26,11 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/test/schemas</directory>
+            </resource>
+        </resources>
     </build>
 
 
@@ -45,6 +50,11 @@
             <artifactId>rest-assured</artifactId>
             <version>3.0.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>3.0.6</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
