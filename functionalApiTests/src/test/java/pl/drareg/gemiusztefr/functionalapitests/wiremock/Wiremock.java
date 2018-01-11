@@ -14,7 +14,13 @@ public class Wiremock {
         wireMockServer.stubFor(get(urlEqualTo("/get"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\"Message\": \"Hello API and INT: $(!RandomInteger)\"}")
+                        .withBody("{\"Message\": \"Hellow API !\"}")
+                        .withTransformers("body-transformer")));
+
+        wireMockServer.stubFor(post(urlEqualTo("/post"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\"Message\": \"Hellow API $(stringToAdd)\"}")
                         .withTransformers("body-transformer")));
 
     }

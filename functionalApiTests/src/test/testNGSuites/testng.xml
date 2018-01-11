@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="AllTests" verbose="1" parallel="tests" thread-count="4">
-    <test name="HellowAPIShowFullReqResTests">
+    <test name="GetHellowAPITests">
         <classes>
-            <class name="pl.drareg.gemiusztefr.functionalapitests.tests.hellowAPI.HellowAPIShowFullReqResTests"/>
+            <class name="pl.drareg.gemiusztefr.functionalapitests.tests.hellowAPI.GetHellowAPITests"/>
+        </classes>
+    </test>
+    <test name="PostHellowAPITests">
+        <classes>
+            <class name="pl.drareg.gemiusztefr.functionalapitests.tests.hellowAPI.PostHellowAPITests"/>
         </classes>
     </test>
 </suite>
